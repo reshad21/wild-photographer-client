@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from '../Layout/Main';
 import Admin from '../Pages/Admin/Admin';
 import ShowUserTable from '../Pages/Admin/ShowUserTable/ShowUserTable';
+import Allservices from '../Pages/Allservices/Allservices';
 import Blog from '../Pages/Blog/Blog';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login/Login';
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
             {
                 path: '/allusertable',
                 element: <ShowUserTable></ShowUserTable>
+            },
+            {
+                path: '/services',
+                element: <Allservices></Allservices>
             }
         ]
     }

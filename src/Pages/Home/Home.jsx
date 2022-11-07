@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import img1 from '../../../src/assets/images/1.jpg';
 import img2 from '../../../src/assets/images/2.jpg';
 import img3 from '../../../src/assets/images/3.jpg';
@@ -39,6 +40,12 @@ const Home = () => {
             </div>
 
             <ServicesSection></ServicesSection>
+
+            <div className="see-more-section text-center my-5">
+                <Link to='/services'>
+                    <button className="btn btn-primary btn-sm">See all</button>
+                </Link>
+            </div>
         </div>
     );
 };
