@@ -3,6 +3,7 @@ import img1 from '../../../src/assets/images/1.jpg';
 import img2 from '../../../src/assets/images/2.jpg';
 import img3 from '../../../src/assets/images/3.jpg';
 import img4 from '../../../src/assets/images/4.jpg';
+import ServicesSection from '../ServicesSection/ServicesSection';
 const Home = () => {
     return (
         <div className='max-w-screen-xl mx-auto'>
@@ -36,6 +37,8 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
+            <ServicesSection></ServicesSection>
         </div>
     );
 };
