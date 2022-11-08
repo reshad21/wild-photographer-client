@@ -43,7 +43,7 @@ const Home = () => {
             <div className='mx-auto grid lg:grid-cols-3 gap-4 my-10 justify-evenly bg-slate-400 p-3'>
 
                 {
-                    services.map(service => <ServicesSection key={service.id} service={service}></ServicesSection>)
+                    services.slice(0, 3).map(service => <ServicesSection key={service.id} service={service}></ServicesSection>)
                 }
 
             </div>
