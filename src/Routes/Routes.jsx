@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from "react-router-dom";
 import Main from '../Layout/Main';
+import AddService from '../Pages/AddService/AddService';
 import Admin from '../Pages/Admin/Admin';
 import ShowUserTable from '../Pages/Admin/ShowUserTable/ShowUserTable';
 import Allservices from '../Pages/Allservices/Allservices';
@@ -55,6 +56,11 @@ export const router = createBrowserRouter([
                 path: '/services/:id',
                 element: <ServiceDetails></ServiceDetails>,
                 loader: ({ params }) => fetch(`service.json/services/${params.id}`),
+            },
+            {
+                path: '/addservice',
+                element: <AddService></AddService>,
+
             }
         ]
     }
