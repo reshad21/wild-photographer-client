@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import img1 from '../../../src/assets/images/1.jpg';
 import img2 from '../../../src/assets/images/2.jpg';
 import img3 from '../../../src/assets/images/3.jpg';
 import img4 from '../../../src/assets/images/4.jpg';
 import ServicesSection from '../ServicesSection/ServicesSection';
 const Home = () => {
+    const services = useLoaderData();
     return (
         <div className='max-w-screen-xl mx-auto'>
             <div className="carousel w-full">
@@ -39,7 +40,13 @@ const Home = () => {
                 </div>
             </div>
 
-            <ServicesSection></ServicesSection>
+            <div className='grid lg:grid-cols-3 gap-4 my-10 justify-evenly bg-slate-400 p-3'>
+
+                {
+                    services.map(service => <ServicesSection key={service.id} services={services}></ServicesSection>)
+                }
+
+            </div>
 
             <div className="see-more-section text-center my-5">
                 <Link to='/services'>
