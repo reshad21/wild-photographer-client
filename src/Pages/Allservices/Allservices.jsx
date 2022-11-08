@@ -1,15 +1,15 @@
 import React from 'react';
-import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
+import ServicesSection from '../ServicesSection/ServicesSection';
 
 const Allservices = () => {
     const services = useLoaderData();
     return (
         <div className='max-w-screen-xl mx-auto grid lg:grid-cols-3 gap-4 my-10 justify-evenly'>
-            {
+            {/* {
 
-                services.map(service => {
+                services?.map(service => {
                     return (
                         <div className="card w-96 bg-base-100 shadow-xl" key={service.id} service={service}>
                             <figure>
@@ -33,6 +33,9 @@ const Allservices = () => {
                     )
                 })
 
+            } */}
+            {
+                services.map(service => <ServicesSection key={service.id} service={service}></ServicesSection>)
             }
         </div>
     );
