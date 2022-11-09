@@ -1,12 +1,20 @@
-import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import img1 from '../../../src/assets/images/1.jpg';
 import img2 from '../../../src/assets/images/2.jpg';
 import img3 from '../../../src/assets/images/3.jpg';
 import img4 from '../../../src/assets/images/4.jpg';
 import ServicesSection from '../ServicesSection/ServicesSection';
 const Home = () => {
-    const services = useLoaderData();
+    // const services = useLoaderData();
+    const [services, setServices] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/services')
+            .then(res => res.json())
+            .then(data => setServices(data))
+    }, [])
+
     return (
         <div className='max-w-screen-xl mx-auto'>
             <div className="carousel w-full">
@@ -49,7 +57,7 @@ const Home = () => {
             </div>
 
             <div className="see-more-section text-center my-5">
-                <Link to='/services'>
+                <Link to='/allservices'>
                     <button className="btn btn-primary btn-sm">See all</button>
                 </Link>
             </div>

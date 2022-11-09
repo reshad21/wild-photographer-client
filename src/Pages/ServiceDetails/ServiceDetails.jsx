@@ -8,24 +8,33 @@ const ServiceDetails = () => {
     const { user } = useContext(userContext)
     // useloader it will be not work because another data need
     const singleService = useLoaderData();
-    console.log("this is service page", typeof singleService);
+    console.log(singleService);
+
+    // const navigate = useNavigate();
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || '/';
+    // const handleGiveReview = (e) => {
+    //     e.preventDefault();
+    //     console.log("click the review button");
+    //     navigate(from, { replace: true });
+    // }
 
     return (
         <div className='max-w-screen-xl mx-auto'>
             <div className="card bg-base-100 shadow-xl my-14">
                 <figure>
                     <PhotoProvider>
-                        <PhotoView src="https://placeimg.com/400/225/arch">
-                            <img src="https://placeimg.com/400/225/arch" alt="Shoes" className='w-full object-cover h-[500px]' />
+                        <PhotoView src={singleService?.image}>
+                            <img src={singleService?.image} alt="Shoes" className='w-full object-cover h-[500px]' />
                         </PhotoView>
                     </PhotoProvider>
                 </figure>
                 <div className="card-body">
-                    <h2 className="card-title">Animal photography</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat tempora aspernatur quo. Quae soluta nihil, pariatur doloremque dolorum tempore esse autem voluptas officiis laborum? Quos consequuntur voluptatum quidem voluptates accusamus?</p>
+                    <h2 className="card-title">{singleService?.name}</h2>
+                    <p>{singleService?.details}</p>
                     <div className="card-actions flex justify-between items-center pt-4">
-                        <span className='font-bold'>Price: 00000000$</span>
-                        <span>Rating: 4.5</span>
+                        <span className='font-bold'>Price: {singleService?.balance}$</span>
+                        <span>Rating: {singleService?.rating}</span>
                     </div>
                 </div>
             </div>
@@ -66,9 +75,15 @@ const ServiceDetails = () => {
                                 </label>
                                 <input type="text" placeholder="Image url" className="input input-bordered" />
                                 <label className="label">
-                                    {
-                                        user ? "" : <Link to="/login" className="label-text-alt link link-hover">Please login to add a review</Link>
-                                    }
+                                    {/* {
+                                        user ? "" : <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button>
+                                    } */}
+
+                                    {/* <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button> */}
+
+                                    <Link to='/login'>
+                                        <button className="label-text-alt link link-hover">Please login to add a review</button>
+                                    </Link>
 
                                 </label>
                             </div>

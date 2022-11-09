@@ -9,6 +9,7 @@ import Blog from '../Pages/Blog/Blog';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login/Login';
 import Signup from '../Pages/Login/Signup/Signup';
+import MyReview from '../Pages/MyReview/MyReview';
 import ServiceDetails from '../Pages/ServiceDetails/ServiceDetails';
 import PrivateRoute from './PrivateRoute';
 
@@ -20,12 +21,10 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('service.json'),
             },
             {
                 path: '/home',
                 element: <Home></Home>,
-                loader: () => fetch('service.json'),
             },
             {
                 path: '/login',
@@ -47,19 +46,24 @@ export const router = createBrowserRouter([
                 path: '/allusertable',
                 element: <ShowUserTable></ShowUserTable>
             },
+
             {
-                path: '/services',
+                path: '/allservices',
                 element: <Allservices></Allservices>,
-                loader: () => fetch('service.json'),
+                loader: () => fetch('http://localhost:5000/services'),
             },
             {
-                path: '/services/:id',
+                path: '/services/:_id',
                 element: <ServiceDetails></ServiceDetails>,
-                loader: ({ params }) => fetch(`service.json/services/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/services/${params._id}`),
             },
             {
                 path: '/addservice',
                 element: <AddService></AddService>,
+            },
+            {
+                path: '/myreview',
+                element: <PrivateRoute><MyReview></MyReview></PrivateRoute>
 
             }
         ]
