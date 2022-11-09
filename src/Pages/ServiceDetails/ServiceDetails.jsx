@@ -1,22 +1,57 @@
-import React from 'react';
+import moment from 'moment';
+import React, { useContext } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
+import { userContext } from '../../Context/AuthContext/AuthContext';
 
 const ServiceDetails = () => {
-    // const { user } = useContext(userContext)
-    // useloader it will be not work because another data need
-    const singleService = useLoaderData();
-    console.log(singleService);
+    const postedTime = moment().format("Do MMM YYYY h:mm:ss a");
 
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || '/';
-    // const handleGiveReview = (e) => {
-    //     e.preventDefault();
-    //     console.log("click the review button");
-    //     navigate(from, { replace: true });
-    // }
+    // const date = new Date();
+    // console.log(date);
+
+    const singleService = useLoaderData();
+
+    const { user } = useContext(userContext);
+    const { uid, photoURL, displayName } = user;
+
+    const handleUserReview = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const review = form.review.value;
+
+        const userreview = {
+            uid,
+            review,
+            photoURL,
+            postedTime,
+            displayName,
+        }
+        // console.log(userreview);
+        fetch('http://localhost:5000/userreview', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userreview),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                form.reset();
+                // if (Success.acknowledged) {
+
+                // }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+
+    }
+
+
 
     return (
         <div className='max-w-screen-xl mx-auto'>
@@ -40,9 +75,10 @@ const ServiceDetails = () => {
 
             <div className="bg-base-100 shadow-xl mb-5 flex gap-10 px-7 py-5 rounded-lg">
                 <img src="https://placeimg.com/200/280/arch" className='rounded-full h-20 w-[7rem] object-cover' alt="Movie" />
-                <div className="">
+                <div className="relative">
                     <h2 className='text-sm'>Written by</h2>
                     <h2 className="card-title">Rashed Uzzaman Reshad!</h2>
+                    <h4 className='text-sm absolute top-0 right-0'>Posted On: {postedTime}</h4>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe omnis odio fugit deserunt ut dolorum sunt ducimus. Consectetur voluptas nemo officiis odit iste quisquam nostrum ex magni non, alias expedita.</p>
                 </div>
             </div>
@@ -53,15 +89,30 @@ const ServiceDetails = () => {
                         <h1 className="text-5xl font-bold">Your Feedback!</h1>
                     </div>
                     <div className="card flex-shrink-0 shadow-2xl bg-base-100 w-full">
-                        <form className="card-body">
+
+                        <form className="card-body" onSubmit={handleUserReview}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Comment</span>
                                 </label>
-                                <textarea className="textarea textarea-primary" placeholder="Your Feedback"></textarea>
+
+                                <textarea name='review' className="textarea textarea-primary" placeholder="Your Feedback"></textarea>
+
+                                <label className="label">
+                                    {/* {
+                                        user ? "" : <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button>
+                                    } */}
+
+                                    {/* <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button> */}
+
+                                    {/* <Link to='/login'>
+                                        <button className="label-text-alt link link-hover">Please login to add a review</button>
+                                    </Link> */}
+
+                                </label>
                             </div>
 
-                            <div className="form-control">
+                            {/* <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
@@ -73,19 +124,7 @@ const ServiceDetails = () => {
                                     <span className="label-text">Image</span>
                                 </label>
                                 <input type="text" placeholder="Image url" className="input input-bordered" />
-                                <label className="label">
-                                    {/* {
-                                        user ? "" : <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button>
-                                    } */}
-
-                                    {/* <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button> */}
-
-                                    <Link to='/login'>
-                                        <button className="label-text-alt link link-hover">Please login to add a review</button>
-                                    </Link>
-
-                                </label>
-                            </div>
+                            </div> */}
 
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Add reviews</button>
