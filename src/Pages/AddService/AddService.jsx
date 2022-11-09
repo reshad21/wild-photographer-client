@@ -4,16 +4,18 @@ const AddService = () => {
     const handleAddService = (e) => {
         e.preventDefault();
         const form = e.target;
-        const photo = form.photo.value;
+        const image = form.image.value;
         const name = form.name.value;
-        const description = form.description.value;
-        const price = form.price.value;
+        const details = form.details.value;
+        const rating = form.rating.value;
+        const balance = form.balance.value;
 
         const serviceInfo = {
-            photo,
             name,
-            description,
-            price
+            image,
+            details,
+            rating,
+            balance
         }
 
         fetch('http://localhost:5000/services', {
@@ -52,7 +54,7 @@ const AddService = () => {
                                 <label className="label">
                                     <span className="label-text">Image Url</span>
                                 </label>
-                                <input type="text" name='photo' placeholder="Service image url" className="input input-bordered" />
+                                <input type="text" name='image' placeholder="Service image url" className="input input-bordered" />
                             </div>
 
                             <div className="form-control">
@@ -66,14 +68,21 @@ const AddService = () => {
                                 <label className="label">
                                     <span className="label-text">Service Description</span>
                                 </label>
-                                <textarea name='description' className="textarea textarea-primary" placeholder="Tell Something About Your Service"></textarea>
+                                <textarea name='details' className="textarea textarea-primary" placeholder="Tell Something About Your Service"></textarea>
                             </div>
 
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Service Price</span>
                                 </label>
-                                <input type="number" name='price' placeholder="Service Price" className="input input-bordered" />
+                                <input type="number" name='balance' placeholder="Service Price" className="input input-bordered" />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Service Rating</span>
+                                </label>
+                                <input type="number" name='rating' placeholder="Service Rating" className="input input-bordered" />
                             </div>
 
                             <div className="form-control mt-6">

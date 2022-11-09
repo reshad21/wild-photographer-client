@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link, useLoaderData } from 'react-router-dom';
-import { userContext } from '../../Context/AuthContext/AuthContext';
 
 const ServiceDetails = () => {
-    const { user } = useContext(userContext)
+    // const { user } = useContext(userContext)
     // useloader it will be not work because another data need
     const singleService = useLoaderData();
     console.log(singleService);
