@@ -1,13 +1,14 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { userContext } from '../../../Context/AuthContext/AuthContext';
 
 const Login = () => {
-    const { logInuser } = useContext(userContext)
+    const { logInuser, googleSignIn } = useContext(userContext)
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
-    console.log(from);
+    // console.log(from);
 
     // login activities
     const handleLoginForm = (e) => {
@@ -15,18 +16,31 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log({ email, password });
+        // console.log({ email, password });
+
         // firebasee login system
         logInuser(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
-                // navigate('/');
                 navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.error(error);
             })
+    }
+
+    // google sign in 
+    const googleProvider = new GoogleAuthProvider();
+    const handleGoogleSignin = () => {
+        console.log("success");
+        googleSignIn(googleProvider)
+            .then((result) => {
+                navigate(from, { replace: true });
+            }).catch((error) => {
+                console.error(error);
+            })
+
     }
     return (
         <div className='max-w-screen-xl mx-auto'>
@@ -58,9 +72,11 @@ const Login = () => {
                             </div>
 
                             <div className="form-control mt-6 bg-primary">
+                                <button onClick={handleGoogleSignin} className="btn btn-primary hover:text-white">Google Login</button>
+                            </div>
+                            <div className="form-control mt-1 bg-primary">
                                 <button type='submit' className="btn btn-primary hover:text-white">Login</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
