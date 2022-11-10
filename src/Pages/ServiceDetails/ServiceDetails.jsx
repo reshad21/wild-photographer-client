@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { useLoaderData } from 'react-router-dom';
@@ -8,13 +8,11 @@ import { userContext } from '../../Context/AuthContext/AuthContext';
 const ServiceDetails = () => {
     const postedTime = moment().format("Do MMM YYYY h:mm:ss a");
 
-    // const date = new Date();
-    // console.log(date);
 
     const singleService = useLoaderData();
 
     const { user } = useContext(userContext);
-    const { uid, photoURL, displayName } = user;
+    const { uid, photoURL, displayName, email } = user;
 
     const handleUserReview = (e) => {
         e.preventDefault();
@@ -23,6 +21,7 @@ const ServiceDetails = () => {
 
         const userreview = {
             uid,
+            email,
             review,
             photoURL,
             postedTime,
@@ -47,9 +46,15 @@ const ServiceDetails = () => {
             .catch((error) => {
                 console.error('Error:', error);
             });
-
-
     }
+
+    const [reviews, setReview] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/userreview')
+            .then(res => res.json())
+            .then(data => setReview(data))
+    }, [])
 
 
 
@@ -73,7 +78,24 @@ const ServiceDetails = () => {
                 </div>
             </div>
 
-            <div className="bg-base-100 shadow-xl mb-5 flex gap-10 px-7 py-5 rounded-lg">
+            <p>TOTAL REVIEW : {reviews.length}</p>
+            {
+                reviews.map(review => {
+                    return (
+                        <div key={review._id} className="bg-base-100 shadow-xl mb-5 flex gap-10 px-7 py-5 rounded-lg">
+                            <img src={review?.photoURL ? review?.photoURL : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpgX-TMnMpzB1BPKuPzMoSBfYMljIE_hhU-A&usqp=CAU`} className='rounded-full h-20 w-[7rem] object-cover' alt="Movie" />
+                            <div className="">
+                                <h2 className='text-sm'>Written by</h2>
+                                <h4 className='text-sm'>Posted On: {review?.postedTime}</h4>
+                                <h2 className="card-title">{review?.displayName ? review?.displayName : "User"}</h2>
+                                <p>{review?.review}</p>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+
+            {/* <div className="bg-base-100 shadow-xl mb-5 flex gap-10 px-7 py-5 rounded-lg">
                 <img src="https://placeimg.com/200/280/arch" className='rounded-full h-20 w-[7rem] object-cover' alt="Movie" />
                 <div className="relative">
                     <h2 className='text-sm'>Written by</h2>
@@ -81,7 +103,7 @@ const ServiceDetails = () => {
                     <h4 className='text-sm absolute top-0 right-0'>Posted On: {postedTime}</h4>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe omnis odio fugit deserunt ut dolorum sunt ducimus. Consectetur voluptas nemo officiis odit iste quisquam nostrum ex magni non, alias expedita.</p>
                 </div>
-            </div>
+            </div> */}
 
             <div className="hero min-h-screen bg-base-200 ">
                 <div className="hero-content flex-col  w-[100%]">

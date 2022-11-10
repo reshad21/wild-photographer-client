@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDhYp2acXXzBkJmYWeG5ywJ3fSUsifaops",
-  authDomain: "winter-shopping-center.firebaseapp.com",
-  projectId: "winter-shopping-center",
-  storageBucket: "winter-shopping-center.appspot.com",
-  messagingSenderId: "124027878028",
-  appId: "1:124027878028:web:b280bdb7a18f6e80dbd9a9"
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId
 };
 
 // Initialize Firebase
