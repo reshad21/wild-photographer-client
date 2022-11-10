@@ -1,4 +1,3 @@
-import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
@@ -6,11 +5,10 @@ import { useLoaderData } from 'react-router-dom';
 import { userContext } from '../../Context/AuthContext/AuthContext';
 
 const ServiceDetails = () => {
-    const postedTime = moment().format("Do MMM YYYY h:mm:ss a");
-
+    // const postedTime = moment().format("Do MMM YYYY h:mm:ss a");
+    const postedTime = new Date();
 
     const singleService = useLoaderData();
-
     const { user } = useContext(userContext);
     const { uid, photoURL, displayName, email } = user;
 

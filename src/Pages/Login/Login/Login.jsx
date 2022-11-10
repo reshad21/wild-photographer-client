@@ -40,8 +40,9 @@ const Login = () => {
             }).catch((error) => {
                 console.error(error);
             })
-
     }
+
+
     return (
         <div className='max-w-screen-xl mx-auto'>
             <div className="hero min-h-screen bg-base-200">

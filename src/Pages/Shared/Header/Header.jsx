@@ -12,7 +12,6 @@ const Header = () => {
         {
             user && user.uid ?
                 <>
-                    <li><Link to='/admin'>Admin</Link></li>
                     <li><Link to='/myreview'>My reviews</Link></li>
                     <li><Link to='/addservice'>Add service</Link></li>
                 </>

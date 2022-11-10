@@ -11,6 +11,7 @@ import Login from '../Pages/Login/Login/Login';
 import Signup from '../Pages/Login/Signup/Signup';
 import MyReview from '../Pages/MyReview/MyReview';
 import ServiceDetails from '../Pages/ServiceDetails/ServiceDetails';
+import UpdateReview from '../Pages/UpdateReview/UpdateReview';
 import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
@@ -65,6 +66,11 @@ export const router = createBrowserRouter([
                 path: '/myreview',
                 element: <PrivateRoute><MyReview></MyReview></PrivateRoute>
 
+            },
+            {
+                path: '/update/:id',
+                element: <UpdateReview></UpdateReview>,
+                loader: ({ params }) => fetch(`https://wild-photographer-server.vercel.app/userreview/${params.id}`)
             }
         ]
     }
