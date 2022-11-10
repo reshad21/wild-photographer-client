@@ -56,7 +56,7 @@ const Home = () => {
                 <p className='text-center'>Most common methods for a photographer that take good pixel perfect photo and show his creativity</p>
             </div>
 
-            <div className='mx-auto grid lg:grid-cols-3 gap-4 my-10 justify-evenly bg-slate-400 p-3'>
+            <div className='mx-auto grid lg:grid-cols-3 gap-4 my-10 justify-evenly p-3'>
 
                 {
                     services.map(service => <ServicesSection key={service.id} service={service}></ServicesSection>)
