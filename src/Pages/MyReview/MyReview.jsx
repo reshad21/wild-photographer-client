@@ -45,7 +45,7 @@ const MyReview = () => {
                             </div>
 
                             <div className="flex-auto w-[60%]">
-                                <h2 className='text-sm'>Written by</h2>
+                                <h2 className='text-sm'>Comment On: {myreview?.postedTime}</h2>
                                 <h2 className="card-title">{myreview?.displayName}</h2>
                                 <p>{myreview?.review}</p>
                             </div>

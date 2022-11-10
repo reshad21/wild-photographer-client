@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import { userContext } from '../../Context/AuthContext/AuthContext';
 
 const ServiceDetails = () => {
@@ -44,9 +45,11 @@ const ServiceDetails = () => {
             .then((data) => {
                 console.log('Success:', data);
                 form.reset();
-                // if (Success.acknowledged) {
-
-                // }
+                toast("Comment successfully!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    theme: "light",
+                });
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -113,23 +116,9 @@ const ServiceDetails = () => {
 
                                 </label>
                             </div>
-
-                            {/* <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input type="text" placeholder="name" className="input input-bordered" />
-                            </div>
-
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Image</span>
-                                </label>
-                                <input type="text" placeholder="Image url" className="input input-bordered" />
-                            </div> */}
-
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Add reviews</button>
+                                <ToastContainer position="top-right" autoClose={5000} />
                             </div>
                         </form>
                     </div>

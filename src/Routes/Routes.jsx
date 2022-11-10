@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/blog',
-                element: <PrivateRoute><Blog></Blog></PrivateRoute>
+                element: <Blog></Blog>
             },
             {
                 path: '/admin',
@@ -60,7 +60,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/addservice',
-                element: <AddService></AddService>,
+                element: <PrivateRoute><AddService></AddService></PrivateRoute>,
             },
             {
                 path: '/myreview',

@@ -1,6 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import { userContext } from '../../../Context/AuthContext/AuthContext';
 
 const Login = () => {
@@ -24,6 +25,10 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log(user);
                 navigate(from, { replace: true });
+                toast("Login successfully!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                });
             })
             .catch((error) => {
                 console.error(error);
@@ -37,6 +42,10 @@ const Login = () => {
         googleSignIn(googleProvider)
             .then((result) => {
                 navigate(from, { replace: true });
+                toast("Login successfully!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                });
             }).catch((error) => {
                 console.error(error);
             })
@@ -74,9 +83,13 @@ const Login = () => {
 
                             <div className="form-control mt-6 bg-primary">
                                 <button onClick={handleGoogleSignin} className="btn btn-primary hover:text-white">Google Login</button>
+
+                                <ToastContainer />
                             </div>
                             <div className="form-control mt-1 bg-primary">
                                 <button type='submit' className="btn btn-primary hover:text-white">Login</button>
+
+                                <ToastContainer />
                             </div>
                         </form>
                     </div>
