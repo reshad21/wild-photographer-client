@@ -9,11 +9,11 @@ const Header = () => {
     const navItems = <>
         <li><Link to='/home'>Home</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
+        <li><Link to='/addservice'>Add service</Link></li>
         {
             user && user.uid ?
                 <>
                     <li><Link to='/myreview'>My reviews</Link></li>
-                    <li><Link to='/addservice'>Add service</Link></li>
                 </>
                 :
                 <>

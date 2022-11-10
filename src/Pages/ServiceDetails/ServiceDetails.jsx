@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { userContext } from '../../Context/AuthContext/AuthContext';
 
 const ServiceDetails = () => {
@@ -10,20 +10,27 @@ const ServiceDetails = () => {
 
     const singleService = useLoaderData();
     const { user } = useContext(userContext);
-    const { uid, photoURL, displayName, email } = user;
+    // const { uid, photoURL, displayName, email } = user;
 
+    const navigate = useNavigate();
     const handleUserReview = (e) => {
         e.preventDefault();
+
+        // if user is not login to the site
+        if (!user) {
+            navigate('/login');
+            return;
+        }
         const form = e.target;
         const review = form.review.value;
 
         const userreview = {
-            uid,
-            email,
+            uid: user?.uid,
+            email: user?.email,
             review,
-            photoURL,
+            photoURL: user?.photoURL,
             postedTime,
-            displayName,
+            displayName: user?.displayName,
         }
         // console.log(userreview);
         fetch('https://wild-photographer-server.vercel.app/userreview', {
@@ -76,6 +83,59 @@ const ServiceDetails = () => {
                 </div>
             </div>
 
+            <div className="hero min-h-screen bg-base-200 ">
+                <div className="hero-content flex-col  w-[100%]">
+                    <div className="text-center lg:text-left">
+                        <h1 className="text-5xl font-bold">Your Feedback!</h1>
+                    </div>
+                    <div className="card flex-shrink-0 shadow-2xl bg-base-100 w-full">
+
+                        <form className="card-body" onSubmit={handleUserReview}>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Comment</span>
+                                </label>
+
+                                <textarea name='review' className="textarea textarea-primary" placeholder="Your Feedback"></textarea>
+
+                                <label className="label">
+                                    {/* {
+                                        user ? "" : <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button>
+                                    } */}
+
+                                    {/* <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button> */}
+
+                                    {
+                                        !user && <Link to='/login'>
+                                            <button className="label-text-alt link link-hover">Please login to add a review</button>
+                                        </Link>
+                                    }
+
+                                </label>
+                            </div>
+
+                            {/* <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Name</span>
+                                </label>
+                                <input type="text" placeholder="name" className="input input-bordered" />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Image</span>
+                                </label>
+                                <input type="text" placeholder="Image url" className="input input-bordered" />
+                            </div> */}
+
+                            <div className="form-control mt-6">
+                                <button className="btn btn-primary">Add reviews</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <p>TOTAL REVIEW : {reviews.length}</p>
             {
                 reviews.map(review => {
@@ -103,56 +163,7 @@ const ServiceDetails = () => {
                 </div>
             </div> */}
 
-            <div className="hero min-h-screen bg-base-200 ">
-                <div className="hero-content flex-col  w-[100%]">
-                    <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Your Feedback!</h1>
-                    </div>
-                    <div className="card flex-shrink-0 shadow-2xl bg-base-100 w-full">
 
-                        <form className="card-body" onSubmit={handleUserReview}>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Comment</span>
-                                </label>
-
-                                <textarea name='review' className="textarea textarea-primary" placeholder="Your Feedback"></textarea>
-
-                                <label className="label">
-                                    {/* {
-                                        user ? "" : <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button>
-                                    } */}
-
-                                    {/* <button onClick={handleGiveReview} className="label-text-alt link link-hover">Please login to add a review</button> */}
-
-                                    {/* <Link to='/login'>
-                                        <button className="label-text-alt link link-hover">Please login to add a review</button>
-                                    </Link> */}
-
-                                </label>
-                            </div>
-
-                            {/* <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input type="text" placeholder="name" className="input input-bordered" />
-                            </div>
-
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Image</span>
-                                </label>
-                                <input type="text" placeholder="Image url" className="input input-bordered" />
-                            </div> */}
-
-                            <div className="form-control mt-6">
-                                <button className="btn btn-primary">Add reviews</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };

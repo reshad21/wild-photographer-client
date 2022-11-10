@@ -16,7 +16,7 @@ const MyReview = () => {
     const [displayReview, setDisplayReview] = useState(myreviews);
 
     const handleReviewDelete = (myreview) => {
-        console.log("clickekd", myreview);
+        console.log("clicked", myreview);
         fetch(`https://wild-photographer-server.vercel.app/userreview/${myreview._id}`, {
             method: 'DELETE'
         })
