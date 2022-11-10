@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { userContext } from '../../Context/AuthContext/AuthContext';
 
 const ServiceDetails = () => {
@@ -48,6 +48,9 @@ const ServiceDetails = () => {
                 toast("Comment successfully!", {
                     position: "top-right",
                     autoClose: 5000,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
                     theme: "light",
                 });
             })
@@ -118,7 +121,6 @@ const ServiceDetails = () => {
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Add reviews</button>
-                                <ToastContainer position="top-right" autoClose={5000} />
                             </div>
                         </form>
                     </div>
