@@ -18,7 +18,7 @@ const AddService = () => {
             balance
         }
 
-        fetch('http://localhost:5000/services', {
+        fetch('https://wild-photographer-server.vercel.app/services', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

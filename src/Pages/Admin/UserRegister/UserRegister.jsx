@@ -15,7 +15,7 @@ const UserRegister = () => {
         console.log(userInfo);
 
         // now we send data to the server
-        fetch('http://localhost:5000/profile', {
+        fetch('https://wild-photographer-server.vercel.app/profile', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

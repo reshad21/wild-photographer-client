@@ -28,7 +28,7 @@ const ServiceDetails = () => {
             displayName,
         }
         // console.log(userreview);
-        fetch('http://localhost:5000/userreview', {
+        fetch('https://wild-photographer-server.vercel.app/userreview', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const ServiceDetails = () => {
     const [reviews, setReview] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/userreview')
+        fetch('https://wild-photographer-server.vercel.app/userreview')
             .then(res => res.json())
             .then(data => setReview(data))
     }, [])

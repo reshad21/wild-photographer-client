@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react';
 const ShowUserTable = () => {
     const [registerusers, setRegisterUser] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/profile')
+        fetch('https://wild-photographer-server.vercel.app/profile')
             .then(res => res.json())
             .then(data => setRegisterUser(data))
     }, [])
 
     const handleUserdelete = (user) => {
         // console.log("deleted successfully", id);
-        fetch(`http://localhost:5000/userdlt/${user._id}`, {
+        fetch(`https://wild-photographer-server.vercel.app/userdlt/${user._id}`, {
             method: 'DELETE',
             body: JSON.stringify(user)
         })

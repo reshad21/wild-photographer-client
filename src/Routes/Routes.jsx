@@ -50,12 +50,12 @@ export const router = createBrowserRouter([
             {
                 path: '/allservices',
                 element: <Allservices></Allservices>,
-                loader: () => fetch('http://localhost:5000/services'),
+                loader: () => fetch('https://wild-photographer-server.vercel.app/services'),
             },
             {
                 path: '/services/:_id',
                 element: <PrivateRoute><ServiceDetails></ServiceDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/services/${params._id}`),
+                loader: ({ params }) => fetch(`https://wild-photographer-server.vercel.app/services/${params._id}`),
             },
             {
                 path: '/addservice',

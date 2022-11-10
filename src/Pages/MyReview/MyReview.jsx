@@ -6,7 +6,7 @@ const MyReview = () => {
     const [myreviews, setMyreview] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/userreview/${user?.email}`)
+        fetch(`https://wild-photographer-server.vercel.app/userreview/${user?.email}`)
             .then(res => res.json())
             .then(data => setMyreview(data))
     }, [user?.email])
@@ -19,7 +19,7 @@ const MyReview = () => {
         const agree = window.confirm(`are you sure ${myreview.name}`);
         if (agree) {
             // console.log("delete the id", user._id);
-            fetch(`http://localhost:5000/userreview/${myreview._id}`, {
+            fetch(`https://wild-photographer-server.vercel.app/userreview/${myreview._id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

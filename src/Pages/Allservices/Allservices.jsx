@@ -8,7 +8,7 @@ const Allservices = () => {
     const [services, setServices] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/allservices')
+        fetch('https://wild-photographer-server.vercel.app/allservices')
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])
